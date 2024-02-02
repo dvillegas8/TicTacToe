@@ -34,6 +34,7 @@ public class TicTacToe
 
     private Square[][] board;
     private boolean isGameOver;
+    private TicTacToeViewer b;
 
     /**
      * Constructor which initialized the board with BLANKs.
@@ -44,11 +45,7 @@ public class TicTacToe
     public TicTacToe() {
         // Initialize Squares in the board
         this.board = new Square[3][3];
-        for(int row = 0; row < this.board.length; row++) {
-            for(int col = 0; col< this.board[row].length; col++) {
-                this.board[row][col] = new Square(row, col);
-            }
-        }
+
 
         // Initialize winning stats variables
         this.isGameOver = false;
@@ -56,6 +53,13 @@ public class TicTacToe
         this.winner = BLANK;
         this.winIndex = -1;
         this.winDirection = -1;
+        b = new TicTacToeViewer(this);
+        for(int row = 0; row < this.board.length; row++) {
+            for(int col = 0; col< this.board[row].length; col++) {
+                this.board[row][col] = new Square(row, col, b);
+            }
+        }
+
     }
 
     /******************** Methods You May Find Helpful ********************/
