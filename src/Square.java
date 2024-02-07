@@ -29,11 +29,11 @@ public class Square {
      * @param col the column the square is in
      */
     public Square(int row, int col, TicTacToeViewer a) {
+        this.a = a;
         this.row = row;
         this.col = col;
         this.marker = TicTacToe.BLANK;
         this.isWinningSquare = false;
-        this.a = a;
         x = a.getImages()[0];
         o =  a.getImages()[1];
     }
@@ -66,17 +66,25 @@ public class Square {
         return this.marker;
     }
     public void draw(Graphics g){
+        // Find cordinates of the square
+        int x_cord = a.X_OFFSET + (col * 120);
+        int y_cord = a.Y_OFFSET + (row * 120);
         // Draw square
-        g.drawRect(a.x, a.y, 100,100);
-        // Checks for winning square and draws it green
         if(this.isWinningSquare){
             g.setColor(Color.green);
-            g.fillRect(a.x, a.y,100, 100);
+            g.fillRect(x_cord, y_cord,120, 120);
         }
+        else{
+            g.setColor(Color.black);
+            g.drawRect(x_cord, y_cord, 120,120);
+        }
+        // Checks for winning square and draws it green
         // Draws X or O if possible
         if(this.getMarker().equals("X")){
-            g.drawImage(x, )
+            g.drawImage(x, x_cord, y_cord, 120, 120, a);
         }
-
+        else if(this.getMarker().equals("O")){
+            g.drawImage(o, x_cord, y_cord, 120, 120, a);
+        }
     }
 }
